@@ -4,7 +4,7 @@ import java.util.Scanner
 
 fun main() {
     val scanner = Scanner(System.`in`)
-    println("=== SISTEM PEMINJAMAN BUKU ===")
+    println("--- Sistem Peminjaman Buku ---")
 
     print("Judul Buku: ")
     val title = scanner.nextLine()
@@ -21,7 +21,7 @@ fun main() {
     }
 
     val loan = Loan(title, borrower, duration)
-    println("\n--- DETAIL PEMINJAMAN ---")
+    println("\nDetail Peminjaman")
     println("Judul Buku   : ${loan.bookTitle}")
     println("Peminjam    : ${loan.borrower}")
     println("Lama Pinjam : ${loan.loanDuration} hari")
