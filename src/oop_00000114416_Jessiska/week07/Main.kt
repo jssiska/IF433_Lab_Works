@@ -34,4 +34,9 @@ fun main(){
         ApiResponse.Loading -> "Tampilkan Spinner"
     }
     println(uiMessage)
+
+    println("\n=== TUGAS ===")
+    GameManager.startGame()
+    GameManager.startGame()
+
 }
