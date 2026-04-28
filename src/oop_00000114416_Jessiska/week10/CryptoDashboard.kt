@@ -16,4 +16,8 @@ fun main() {
     txRepo.add(Transaction("T01", 200.0))
     txRepo.add(Transaction("T02", 100.0))
 
+    println("\n=== Transactions ===")
+    txRepo.getAll().forEach {
+        println("ID: ${it.id}, Amount: ${it.amount}")
+    }
 }
