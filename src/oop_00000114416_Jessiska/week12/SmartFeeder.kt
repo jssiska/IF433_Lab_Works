@@ -19,6 +19,7 @@ fun dispenseKibble(requestedGram: Int, availableGram: Int, isJammed: Boolean): I
 }
 
 fun main(){
+    println("=== SMART FEEDER ===")
     var currentKibbleStock = 50
     try {
         currentKibbleStock = dispenseKibble(
