@@ -42,7 +42,51 @@ class EmailNotifier : NotificationService {
     }
 }
 
+interface PricingStrategy {
+    fun calculate(price: Double): Double
+}
+
+class RegularPricing : PricingStrategy {
+    override fun calculate(price: Double): Double {
+        return price
+    }
+}
+
+class VipPricing : PricingStrategy {
+    override fun calculate(price: Double): Double {
+        return price * 0.90
+    }
+}
+
 class SafeOrderProcessor(
     private val repo: OrderRepository,
     private val notifier: NotificationService
-)
+){
+    fun processOrder(
+        itemName: String,
+        basePrice: Double,
+        customerType: String,
+        strategy: PricingStrategy
+    ) {
+        val finalPrice = strategy.calculate(basePrice)
+        println("Memproses pesanan $itemName seharga $finalPrice")
+
+        repo.saveOrder(
+            itemName,
+            finalPrice,
+            customerType
+        )
+
+        notifier.sendNotification(
+            "Pesanan $itemName Anda telah dikonfirmasi."
+        )
+    }
+}
+
+fun main() {
+    val processor = SafeOrderProcessor(
+        CsvOrderRepository(),
+        EmailNotifier()
+    )
+    processor.processOrder("Laptop", 1000000.0, "VIP", VipPricing())
+}
